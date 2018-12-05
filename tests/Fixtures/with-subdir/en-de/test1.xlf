@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" version="1.2">
+  <file
+    datatype="plaintext"
+    date="2000-01-01T00:00:00+00:00"
+    original="Super program"
+    source-language="en"
+    target-language="de"
+  >
+    <body>
+      <trans-unit id="test-string-with-only-source">
+        <source>The source value</source>
+      </trans-unit>
+      <trans-unit id="test-string-with-source-and-target">
+        <source>The source value</source>
+        <target>The target value</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

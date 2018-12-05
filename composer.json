@@ -1,0 +1,49 @@
+{
+  "name": "cyberspectrum/i18n-xliff",
+  "description": "Simple translation mapping and exporting of xliff files",
+  "license": "MIT",
+  "keywords": [
+    "i18n"
+  ],
+  "type": "library",
+  "homepage": "https://www.cyberspectrum.de/",
+  "authors": [
+    {
+      "name": "Christian Schiffler",
+      "email": "c.schiffler@cyberspectrum.de",
+      "homepage": "https://www.cyberspectrum.de",
+      "role": "Maintainer"
+    }
+  ],
+  "support": {
+    "email": "info@cyberspectrum.de",
+    "issues": "https://github.com/cyberspectrum/i18n-xliff/issues",
+    "source": "https://github.com/cyberspectrum/i18n-xliff"
+  },
+  "require": {
+    "php": "^7.1.3",
+    "cyberspectrum/i18n": "^1.0.0@dev",
+    "psr/log": "^1.1",
+    "symfony/finder": "^3.4 | ^4.2",
+    "webmozart/path-util": "^2.3"
+  },
+  "require-dev": {
+    "phpcq/all-tasks": "^1.2",
+    "symfony/filesystem": "^3.4 | ^4.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "CyberSpectrum\\I18N\\Xliff\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "CyberSpectrum\\I18N\\Xliff\\Test\\": "tests"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}
