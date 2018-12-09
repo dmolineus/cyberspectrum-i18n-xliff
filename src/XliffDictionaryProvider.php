@@ -54,31 +54,33 @@ class XliffDictionaryProvider implements
     private $rootDir;
 
     /**
-     * Flag if translations shall be stored in sub directories.
+     * The directory mask to use when working with subdirectories.
      *
-     * If true, translations will get stored in sub directories naming the source an target language, if false they will
-     * all get stored in the root.
+     * If not empty, translations will get stored in sub directories naming the source an target language.
+     * If empty, they will get stored in the root directory.
      *
-     * @var bool
+     * @var string
      */
-    private $subDirectories;
+    private $subDirectoryMask;
 
     /**
      * Create a new instance.
      *
-     * @param string $rootDir        The root directory.
-     * @param bool   $subDirectories Flag if sub directories per language shall be created.
+     * @param string $rootDir          The root directory.
+     * @param string $subDirectoryMask The sub directory mask to apply. Allowed place holders: "{source}" "{target}".
      *
      * @throws \InvalidArgumentException When the root dir is invalid.
      */
-    public function __construct(string $rootDir, bool $subDirectories = true)
-    {
+    public function __construct(
+        string $rootDir,
+        string $subDirectoryMask = '{source}-{target}'
+    ) {
         $rootDir = Path::canonicalize($rootDir);
         if (false === realpath($rootDir) || !is_dir($rootDir)) {
             throw new \InvalidArgumentException('Root directory does not exist or is not a directory.');
         }
-        $this->rootDir        = realpath($rootDir);
-        $this->subDirectories = $subDirectories;
+        $this->rootDir          = realpath($rootDir);
+        $this->subDirectoryMask = $subDirectoryMask;
         $this->setLogger(new NullLogger());
     }
 
@@ -108,9 +110,13 @@ class XliffDictionaryProvider implements
      */
     private function getFileNameFor(string $name, string $sourceLanguage, string $targetLanguage): string
     {
-        return $this->rootDir . DIRECTORY_SEPARATOR . ($this->subDirectories
-            ? $sourceLanguage . '-' . $targetLanguage . DIRECTORY_SEPARATOR
-            : DIRECTORY_SEPARATOR) . $name . '.xlf';
+        if ('' !== $this->subDirectoryMask) {
+            return $this->rootDir . DIRECTORY_SEPARATOR
+                . strtr($this->subDirectoryMask, ['{source}' => $sourceLanguage, '{target}' => $targetLanguage])
+                . DIRECTORY_SEPARATOR . $name . '.xlf';
+        }
+
+        return $this->rootDir . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . $name . '.xlf';
     }
 
     /**

@@ -42,8 +42,8 @@ class XliffDictionaryProviderTest extends TestCase
     public function dictionaryProviderProvider(): array
     {
         return [
-            'without sub dir'    => [__DIR__ . '/Fixtures/without-subdir', false],
-            'with sub dir' => [__DIR__ . '/Fixtures/with-subdir', true],
+            'without sub dir'    => [__DIR__ . '/Fixtures/without-subdir', ''],
+            'with sub dir' => [__DIR__ . '/Fixtures/with-subdir', '{source}-{target}'],
         ];
     }
 
@@ -51,13 +51,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testGetAvailableDictionariesFromFixturesDirectory(string $fixtures, bool $subDirs): void
+    public function testGetAvailableDictionariesFromFixturesDirectory(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -72,13 +72,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testGetFromFixturesDirectory(string $fixtures, bool $subDirs): void
+    public function testGetFromFixturesDirectory(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -89,13 +89,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testThrowsForUnknownDictionary(string $fixtures, bool $subDirs): void
+    public function testThrowsForUnknownDictionary(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -111,13 +111,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testGetAvailableWritableDictionariesFromFixturesDirectory(string $fixtures, bool $subDirs): void
+    public function testGetAvailableWritableDictionariesFromFixturesDirectory(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -132,13 +132,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testGetWritable(string $fixtures, bool $subDirs): void
+    public function testGetWritable(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -149,13 +149,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testThrowsForUnknownDictionaryForWrite(string $fixtures, bool $subDirs): void
+    public function testThrowsForUnknownDictionaryForWrite(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -171,13 +171,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testCreateDictionary(string $fixtures, bool $subDirs): void
+    public function testCreateDictionary(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
@@ -188,13 +188,13 @@ class XliffDictionaryProviderTest extends TestCase
      * Test.
      *
      * @param string $fixtures The fixtures directory.
-     * @param bool   $subDirs  Flag if sub dirs shall be created.
+     * @param string $subDirs  The sub directory mask.
      *
      * @return void
      *
      * @dataProvider dictionaryProviderProvider
      */
-    public function testThrowsForExistingDictionary(string $fixtures, bool $subDirs): void
+    public function testThrowsForExistingDictionary(string $fixtures, string $subDirs): void
     {
         $provider = new XliffDictionaryProvider($this->provide($fixtures), $subDirs);
 
