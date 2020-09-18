@@ -38,7 +38,7 @@ class TestCase extends \PHPUnit\Framework\TestCase
     /**
      * {@inheritDoc}
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         if (null !== $this->dirName && is_dir($this->dirName)) {
