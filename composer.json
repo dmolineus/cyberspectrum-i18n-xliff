@@ -2,11 +2,10 @@
   "name": "cyberspectrum/i18n-xliff",
   "description": "Simple translation mapping and exporting of xliff files",
   "license": "MIT",
+  "type": "library",
   "keywords": [
     "i18n"
   ],
-  "type": "library",
-  "homepage": "https://www.cyberspectrum.de/",
   "authors": [
     {
       "name": "Christian Schiffler",
@@ -15,21 +14,22 @@
       "role": "Maintainer"
     }
   ],
+  "homepage": "https://www.cyberspectrum.de/",
   "support": {
     "email": "info@cyberspectrum.de",
     "issues": "https://github.com/cyberspectrum/i18n-xliff/issues",
     "source": "https://github.com/cyberspectrum/i18n-xliff"
   },
   "require": {
-    "php": "^7.1.3",
-    "cyberspectrum/i18n": "^1.0.0@dev",
-    "psr/log": "^1.1",
-    "symfony/finder": "^3.4 | ^4.2 | ^5.0",
-    "webmozart/path-util": "^2.3"
+    "php": "^7.4 || ^8.0",
+    "ext-dom": "*",
+    "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
+    "psr/log": "^1.1 || ^2.0 || ^3.0",
+    "symfony/finder": "^3.4 || ^4.2 || ^5.0 || ^6.0"
   },
   "require-dev": {
-    "phpcq/all-tasks": "^1.3",
-    "symfony/filesystem": "^3.4 | ^4.2 | ^5.0"
+    "phpcq/runner-bootstrap": "^1.0@dev",
+    "symfony/filesystem": "^3.4 || ^4.2 || ^5.0 || ^6.0"
   },
   "autoload": {
     "psr-4": {
