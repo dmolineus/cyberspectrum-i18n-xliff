@@ -24,12 +24,12 @@
     "php": "^7.4 || ^8.0",
     "ext-dom": "*",
     "cyberspectrum/i18n": "dev-fix/phpcq-2 as 1.0.0@dev",
-    "psr/log": "^1.1 || ^2.0 || ^3.0",
+    "psr/log": "^1.1.4 || ^2.0 || ^3.0",
+    "symfony/filesystem": "^3.4 || ^4.2 || ^5.0 || ^6.0",
     "symfony/finder": "^3.4 || ^4.2 || ^5.0 || ^6.0"
   },
   "require-dev": {
-    "phpcq/runner-bootstrap": "^1.0@dev",
-    "symfony/filesystem": "^3.4 || ^4.2 || ^5.0 || ^6.0"
+    "phpcq/runner-bootstrap": "^1.0@dev"
   },
   "autoload": {
     "psr-4": {

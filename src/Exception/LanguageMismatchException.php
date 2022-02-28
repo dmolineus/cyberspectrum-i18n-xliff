@@ -1,23 +1,6 @@
 <?php
 
-/**
- * This file is part of cyberspectrum/i18n-xliff.
- *
- * (c) 2018 CyberSpectrum.
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * This project is provided in good faith and hope to be usable by anyone.
- *
- * @package    cyberspectrum/i18n-xliff
- * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
- * @copyright  2018 CyberSpectrum.
- * @license    https://github.com/cyberspectrum/i18n-xliff/blob/master/LICENSE MIT
- * @filesource
- */
-
-declare(strict_types = 1);
+declare(strict_types=1);
 
 namespace CyberSpectrum\I18N\Xliff\Exception;
 
@@ -26,33 +9,17 @@ namespace CyberSpectrum\I18N\Xliff\Exception;
  */
 class LanguageMismatchException extends \RuntimeException
 {
-    /**
-     * The expected source.
-     *
-     * @var string
-     */
-    private $expectedSource;
+    /** The expected source. */
+    private string $expectedSource;
 
-    /**
-     * The expected target.
-     *
-     * @var string
-     */
-    private $expectedTarget;
+    /** The expected target. */
+    private string $expectedTarget;
 
-    /**
-     * The real source.
-     *
-     * @var string
-     */
-    private $realSource;
+    /** The real source. */
+    private string $realSource;
 
-    /**
-     * The real target.
-     *
-     * @var string
-     */
-    private $realTarget;
+    /** The real target. */
+    private string $realTarget;
 
     /**
      * Create a new instance.
@@ -77,41 +44,25 @@ class LanguageMismatchException extends \RuntimeException
         ));
     }
 
-    /**
-     * Retrieve expectedSource.
-     *
-     * @return string
-     */
+    /** Retrieve expected source. */
     public function getExpectedSource(): string
     {
         return $this->expectedSource;
     }
 
-    /**
-     * Retrieve expectedTarget.
-     *
-     * @return mixed
-     */
+    /** Retrieve expected target. */
     public function getExpectedTarget(): string
     {
         return $this->expectedTarget;
     }
 
-    /**
-     * Retrieve realSource.
-     *
-     * @return mixed
-     */
+    /** Retrieve real source. */
     public function getRealSource(): string
     {
         return $this->realSource;
     }
 
-    /**
-     * Retrieve realTarget.
-     *
-     * @return mixed
-     */
+    /** Retrieve real target. */
     public function getRealTarget(): string
     {
         return $this->realTarget;
