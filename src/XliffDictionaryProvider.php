@@ -19,7 +19,6 @@ use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use RuntimeException;
 use Symfony\Component\Filesystem\Filesystem;
-use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Traversable;
@@ -30,7 +29,6 @@ use function is_dir;
 use function is_readable;
 use function is_writable;
 use function mkdir;
-use function realpath;
 
 /**
  * This provides access to the xliff translations in the store.
@@ -216,12 +214,20 @@ class XliffDictionaryProvider implements
      */
     private function getFinder(): Iterator
     {
-        return Finder::create()
+        /**
+         * @var Iterator<string, SplFileInfo> $iterator
+         * @psalm-suppress UnnecessaryVarAnnotation
+         * Symfony 4.4 denotes the iterator as "Iterator|array<array-key, SplFileInfo>"
+         * remove when we drop sf 4.4
+         */
+        $iterator = Finder::create()
             ->in($this->rootDir)
             ->ignoreUnreadableDirs()
             ->files()
             ->name('*.xlf')
             ->getIterator();
+
+        return $iterator;
     }
 
     /**
