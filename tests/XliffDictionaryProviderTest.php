@@ -14,7 +14,10 @@ use RuntimeException;
 
 use function iterator_to_array;
 
-/** @covers \CyberSpectrum\I18N\Xliff\XliffDictionaryProvider */
+/**
+ * @covers \CyberSpectrum\I18N\Xliff\XliffDictionaryProvider
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ */
 class XliffDictionaryProviderTest extends TestCase
 {
     /**
@@ -179,5 +182,13 @@ class XliffDictionaryProviderTest extends TestCase
         $this->expectExceptionMessage('Dictionary root directory is not writable.');
 
         $provider->createDictionary('test1', 'en', 'de');
+    }
+
+    public function testThrowsForNonExistingRootDir(): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Root directory does not exist or is not a directory.');
+
+        new XliffDictionaryProvider($this->provide() . DIRECTORY_SEPARATOR . 'does-not-exist');
     }
 }

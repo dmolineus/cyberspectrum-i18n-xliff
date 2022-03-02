@@ -18,6 +18,7 @@ use Psr\Log\LoggerAwareInterface;
 use Psr\Log\LoggerAwareTrait;
 use Psr\Log\NullLogger;
 use RuntimeException;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Path;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
@@ -66,11 +67,13 @@ class XliffDictionaryProvider implements
         string $rootDir,
         string $subDirectoryMask = '{source}-{target}'
     ) {
-        $rootDir = Path::canonicalize($rootDir);
-        if (false === realpath($rootDir) || !is_dir($rootDir)) {
+        $fileSystem = new Filesystem();
+
+        $rootDir = $fileSystem->readlink($rootDir, true);
+        if (null === $rootDir) {
             throw new InvalidArgumentException('Root directory does not exist or is not a directory.');
         }
-        $this->rootDir          = realpath($rootDir);
+        $this->rootDir          = $rootDir;
         $this->subDirectoryMask = $subDirectoryMask;
         $this->setLogger(new NullLogger());
     }
@@ -99,7 +102,7 @@ class XliffDictionaryProvider implements
                 . DIRECTORY_SEPARATOR . $name . '.xlf';
         }
 
-        return $this->rootDir . DIRECTORY_SEPARATOR . DIRECTORY_SEPARATOR . $name . '.xlf';
+        return $this->rootDir . DIRECTORY_SEPARATOR . $name . '.xlf';
     }
 
     /**
