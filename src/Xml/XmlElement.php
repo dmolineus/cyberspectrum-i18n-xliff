@@ -40,11 +40,11 @@ final class XmlElement extends DOMElement
             $namespace === XliffFile::XLIFF_NS
             && $this->ownerDocument->isDefaultNamespace(XliffFile::XLIFF_NS)
         ) {
-            call_user_func_array(['parent', 'setAttribute'], array_slice(func_get_args(), 1));
+            parent::setAttribute($qualifiedName, $value);
             return;
         }
 
-        call_user_func_array(['parent', 'setAttributeNS'], func_get_args());
+        parent::setAttributeNS($namespace, $qualifiedName, $value);
     }
 
     /**
@@ -69,11 +69,9 @@ final class XmlElement extends DOMElement
             $namespace === XliffFile::XLIFF_NS
             && $this->ownerDocument->isDefaultNamespace(XliffFile::XLIFF_NS)
         ) {
-            /** @psalm-suppress MixedReturnStatement */
-            return call_user_func_array(['parent', 'getAttribute'], array_slice(func_get_args(), 1));
+            return parent::getAttribute($localName);
         }
 
-        /** @psalm-suppress MixedReturnStatement */
-        return call_user_func_array(['parent', 'getAttributeNS'], func_get_args());
+        return parent::getAttributeNS($namespace, $localName);
     }
 }
