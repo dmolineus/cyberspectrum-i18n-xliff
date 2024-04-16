@@ -27,11 +27,11 @@ class WritableXliffDictionaryTest extends TestCase
         self::assertSame('de', $dictionary->getTargetLanguage());
         self::assertSame(
             ['test-string-with-only-source', 'test-string-with-source-and-target'],
-            iterator_to_array($dictionary->keys())
+            iterator_to_array($dictionary->keys()),
         );
         self::assertInstanceOf(
             XliffTranslationValue::class,
-            $value = $dictionary->get('test-string-with-only-source')
+            $value = $dictionary->get('test-string-with-only-source'),
         );
         self::assertSame('test-string-with-only-source', $value->getKey());
         self::assertSame('The source value', $value->getSource());
@@ -41,7 +41,7 @@ class WritableXliffDictionaryTest extends TestCase
 
         self::assertInstanceOf(
             XliffTranslationValue::class,
-            $value = $dictionary->get('test-string-with-source-and-target')
+            $value = $dictionary->get('test-string-with-source-and-target'),
         );
         self::assertSame('test-string-with-source-and-target', $value->getKey());
         self::assertSame('The source value', $value->getSource());
@@ -132,5 +132,24 @@ class WritableXliffDictionaryTest extends TestCase
         $this->expectExceptionMessage('Key "unknown-key" not found');
 
         $dictionary->getWritable('unknown-key');
+    }
+
+    public function testBuffering(): void
+    {
+        $dictionary = new WritableXliffDictionary($this->getTempFile());
+        $dictionary->beginBuffering();
+        self::assertTrue($dictionary->isBuffering());
+    }
+
+    public function commitBuffering(): void
+    {
+        $dictionary = new WritableXliffDictionary($this->getTempFile());
+        $dictionary->beginBuffering();
+        self::assertTrue($dictionary->isBuffering());
+
+        $dictionary->add('test');
+        $dictionary->commitBuffer();
+
+        self::assertFalse($dictionary->isBuffering());
     }
 }

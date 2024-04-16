@@ -117,6 +117,8 @@ class WritableXliffDictionary extends XliffDictionary implements
         if ($this->buffering) {
             throw new RuntimeException('Already buffering.');
         }
+
+        $this->buffering = true;
     }
 
     /**
